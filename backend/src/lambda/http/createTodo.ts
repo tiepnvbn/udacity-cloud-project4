@@ -12,19 +12,24 @@ export const handler = middy(
     logger.info('create todo')
     try {
       const newTodo: CreateTodoRequest = JSON.parse(event.body)
-
-      // TODO: Implement creating a new TODO item
-      const jwtToken = getToken(event.headers.Authorization)
-      const newCreatedTodo = await createTodo(newTodo, jwtToken)
-      return {
-        statusCode: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': true
-        },
-        body: JSON.stringify({
-         item: newCreatedTodo
-        })
+      if(newTodo.name.trim() == ""){
+        return {
+          statusCode: 400,
+          body: "Enter a task name!"
+        }
+      }else{
+        const jwtToken = getToken(event.headers.Authorization)
+        const newCreatedTodo = await createTodo(newTodo, jwtToken)
+        return {
+          statusCode: 200,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true
+          },
+          body: JSON.stringify({
+           item: newCreatedTodo
+          })
+        }
       }
     } catch (e) {
       logger.error(e.message)
