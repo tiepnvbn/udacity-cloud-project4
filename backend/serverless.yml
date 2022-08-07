@@ -33,7 +33,7 @@ provider:
     TODOS_USER_INDEX: TodoUserIndex
     ATTACHMENT_S3_BUCKET: serverless-c4-todo-images-284614606815-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    JWTS_URL: https://dev-1ce4mq2j.us.auth0.com/.well-known/jwks.json
+    JWTS_URL: https://dev--ehqvu3i.us.auth0.com/.well-known/jwks.json
 
   iam:
     role:
